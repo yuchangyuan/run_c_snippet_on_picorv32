@@ -17,13 +17,13 @@
 - iverilog, for simulate verilog hardware description
 - picorv32, a 32bit RISC-V core, in verilog source form
 ** how to
-- top-down
-  + reverse to ordinary condition
-  + design hardware to make software run easily
-- step
-  + complete trival C code to a full project
-  + design hardware peripheral, according to C project
-  + wrap up & run the code, with simulator
-  + more experiment
-* software(C code)
-* hardware(verilog HDL)
+*** top-down
+- reverse to ordinary condition
+- design hardware to make software run easily
+*** step
+- complete trival C code to a full project
+- design hardware peripheral, according to C project
+- wrap up & run the code, with simulator
+- more experiment
+* software side(C code)
+* hardware side(verilog HDL)
