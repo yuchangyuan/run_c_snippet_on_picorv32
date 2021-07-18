@@ -1,0 +1,29 @@
+#+title: Run C snippet on pico RISC-V core with simulator
+#+subtitle: A step by step guide
+#+author: Yù Chāngyuǎn
+
+* warm up
+** what we want
+- C code snippet
+#+begin_src c
+  int main()
+  {
+    putStrLn("Hello, world!");
+  }
+#+end_src
+- run on RISC-V core, in software way
+** what we have
+- gcc riscv32 toolchain, for cross compile
+- iverilog, for simulate verilog hardware description
+- picorv32, a 32bit RISC-V core, in verilog source form
+** how to
+- top-down
+  + reverse to ordinary condition
+  + design hardware to make software run easily
+- step
+  + complete trival C code to a full project
+  + design hardware peripheral, according to C project
+  + wrap up & run the code, with simulator
+  + more experiment
+* software(C code)
+* hardware(verilog HDL)
