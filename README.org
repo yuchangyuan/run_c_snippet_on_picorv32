@@ -2,6 +2,9 @@
 #+subtitle: A step by step guide
 #+author: Yù Chāngyuǎn
 
+# use large font, run below command with C-x C-e
+# (set-frame-font "Ubuntu Mono-32")
+
 * warm up
 ** what we want
 - C code snippet
@@ -18,7 +21,7 @@
 - picorv32, a 32bit RISC-V core, in verilog source form
 ** how to
 *** top-down
-- reverse to ordinary condition
+- reverse to ordinary condition, mostly
 - design hardware to make software run easily
 *** step
 - complete trival C code to a full project
@@ -26,4 +29,109 @@
 - wrap up & run the code, with simulator
 - more experiment
 * software side(C code)
+** what code snippet actually do
+*** add place-holder function to make code compile
+#+begin_src c
+void __attribute__ ((noinline)) out_char(char c)
+{
+    // place holder here
+    // to be replace by actual IO code
+}
+
+void putStrLn(char *str)
+{
+    char *p = str;
+
+    while (*p) {
+        out_char(*p);
+        p++;
+    }
+}
+
+int main()
+{
+    putStrLn("Hello, world!");
+}
+#+end_src
+
+*** compile with RISC-V cross compiler, then disassemble
+- gcc -o s2 s2.c
+- objectdump -D s2 > s2.list
+
+*** list
+#+begin_src asm
+; TODO, here include objectdump -D output
+#+end_src
+
+*** actual do
++ memory access
+  - fetch instruction
+  - read data
+  - write data
++ IO access
+  - /out_char/ (currently a place holder)
+*** convert to hardware requirement
++ we have core
++ we need memory
++ we need output port(no need of input)
+** how to make our program accessible to hardware
+*** what a C program contain
++ read only data
++ readable & writable data
+  - need initialize
+  - uninitialized or initialize to 0
+*** section
+- text
+- data(sdata/rodata)
+- bss(COMMON)
+*** memory layout design for hardware
+**** hardware spec & restriction
+- start address of core, at 0x0000
+- both addres range of any memory block should continuous
+- capacity of memory better be power of 2, and width is 32
+- we have two type of memory: ROM & RAM
+**** hardware requirement
+- place read only data into ROM, or RAM(we don't need to write)
+- initialize data in RAM, for data need initialize
+**** common case for reference
+***** small ROM & RAM
+- tiny ROM place at address 0, act as bootloader
+- code in bootloader access IO device, load actual program from external to RAM
+  + include text, data section
+  + not include bss/COMMON section
+- jump to RAM, and run the program
+***** flash & RAM
+- flash place at address 0, read only part of a program
+- flash can be programed
+- a copy of readable & writable data also in flash
+  + copied to RAM before run actual program
+  + data section
+**** initialize code
+both case include some code to initialize or prepare for environment before actual program run
+**** our choice
+- similar to "flash & RAM"
+  + we can recreate ROM when program change, like program a flash memory
+- ROM at address 0, size 128K, contain the text section
+- ROM at address 128K, size 128K, contain a copy of data section
+- RAM at address 256K, size 256K
+
+  | type | name | start addr | size  |
+  |------+------+------------+-------|
+  | ROM  | rom0 | 0          | 128Ki |
+  | ROM  | rom1 | 128Ki      | 128Ki |
+  | RAM  | ram  | 256Ki      | 256Ki |
+
+**** alternative choice
+- do not include rom1, but a special RAM can be initialized
+  + no need of initialize code
+  + need special RAM implementation or RAM
+  + need extra hardware to initialize the RAM, this may contain other ROMs
+- do not include rom0 & rom1, but a special RAM can be initialized
+  + same as above
+- merge rom0 & rom1 into a single ROM, and include a table in ROM, which contain the each section address and size
+  + more complex initialize code
+  + more complex to generate the ROM
+** and make our program can access hardware
+** linker script
+
 * hardware side(verilog HDL)
