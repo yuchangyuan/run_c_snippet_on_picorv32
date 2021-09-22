@@ -12,6 +12,8 @@ void putStrLn(char *str)
         out_char(*p);
         p++;
     }
+
+    out_char('\n');
 }
 
 int main()
