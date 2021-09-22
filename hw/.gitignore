@@ -1,0 +1,5 @@
+/*.bin
+/rom_gen
+/tb
+/*.vcd
+/rom*.v
