@@ -5,7 +5,9 @@ MEMORY {
 
 SECTIONS {
     .init : {
+        . = ALIGN(4);
         start.o(*)
+        . = ALIGN(4);
     } > rom0
 
     .text : {
@@ -13,6 +15,7 @@ SECTIONS {
 
         *(.text)
         *(.text*)
+        . = ALIGN(4);
 
     } > rom0
 
@@ -23,12 +26,14 @@ SECTIONS {
         *(.rodata*)
         *(.srodata)
         *(.srodata*)
+
+        . = ALIGN(4);
     } > rom0
 
     .data : {
         . = ALIGN(4);
         _sdata = .;
-        
+
         *(.data)
         *(.data*)
         *(.sdata)
@@ -41,7 +46,7 @@ SECTIONS {
     .bss : {
         . = ALIGN(4);
         _sbss = .;
-        
+
         *(.bss)
         *(.bss*)
         *(.sbss)

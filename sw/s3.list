@@ -10,11 +10,9 @@ Disassembly of section .init:
    8:	020000ef          	jal	ra,28 <init>
    c:	05e000ef          	jal	ra,6a <main>
   10:	9002                	ebreak
+	...
 
 Disassembly of section .text:
-
-00000012 <putStrLn-0x2>:
-	...
 
 00000014 <putStrLn>:
   14:	00080737          	lui	a4,0x80
