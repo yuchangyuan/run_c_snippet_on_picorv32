@@ -1,0 +1,80 @@
+
+s3:     file format elf32-littleriscv
+
+
+Disassembly of section .init:
+
+00000000 <_start>:
+   0:	00080137          	lui	sp,0x80
+   4:	00010113          	mv	sp,sp
+   8:	020000ef          	jal	ra,28 <init>
+   c:	05e000ef          	jal	ra,6a <main>
+  10:	9002                	ebreak
+
+Disassembly of section .text:
+
+00000012 <putStrLn-0x2>:
+	...
+
+00000014 <putStrLn>:
+  14:	00080737          	lui	a4,0x80
+  18:	00054783          	lbu	a5,0(a0)
+  1c:	e391                	bnez	a5,20 <putStrLn+0xc>
+  1e:	8082                	ret
+  20:	00f70023          	sb	a5,0(a4) # 80000 <_edata+0x40000>
+  24:	0505                	addi	a0,a0,1
+  26:	bfcd                	j	18 <putStrLn+0x4>
+
+00000028 <init>:
+  28:	000407b7          	lui	a5,0x40
+  2c:	00040737          	lui	a4,0x40
+  30:	00078793          	mv	a5,a5
+  34:	000206b7          	lui	a3,0x20
+  38:	00070713          	mv	a4,a4
+  3c:	00e7ed63          	bltu	a5,a4,56 <init+0x2e>
+  40:	000407b7          	lui	a5,0x40
+  44:	00040737          	lui	a4,0x40
+  48:	00078793          	mv	a5,a5
+  4c:	00070713          	mv	a4,a4
+  50:	00e7e963          	bltu	a5,a4,62 <init+0x3a>
+  54:	8082                	ret
+  56:	4290                	lw	a2,0(a3)
+  58:	0791                	addi	a5,a5,4
+  5a:	0691                	addi	a3,a3,4
+  5c:	fec7ae23          	sw	a2,-4(a5) # 3fffc <main+0x3ff92>
+  60:	bff1                	j	3c <init+0x14>
+  62:	0791                	addi	a5,a5,4
+  64:	fe07ae23          	sw	zero,-4(a5)
+  68:	b7e5                	j	50 <init+0x28>
+
+0000006a <main>:
+  6a:	00000537          	lui	a0,0x0
+  6e:	1141                	addi	sp,sp,-16
+  70:	08050513          	addi	a0,a0,128 # 80 <main+0x16>
+  74:	c606                	sw	ra,12(sp)
+  76:	3f79                	jal	14 <putStrLn>
+  78:	40b2                	lw	ra,12(sp)
+  7a:	4501                	li	a0,0
+  7c:	0141                	addi	sp,sp,16
+  7e:	8082                	ret
+
+Disassembly of section .rodata:
+
+00000080 <.rodata>:
+  80:	6548                	flw	fa0,12(a0)
+  82:	6c6c                	flw	fa1,92(s0)
+  84:	77202c6f          	jal	s8,27f6 <main+0x278c>
+  88:	646c726f          	jal	tp,c76ce <_edata+0x876ce>
+  8c:	0021                	c.nop	8
+	...
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	3a434347          	fmsub.d	ft6,ft6,ft4,ft7,rmm
+   4:	2820                	fld	fs0,80(s0)
+   6:	29554e47          	fmsub.s	ft8,fa0,fs5,ft5,rmm
+   a:	3820                	fld	fs0,112(s0)
+   c:	322e                	fld	ft4,232(sp)
+   e:	302e                	fld	ft0,232(sp)
+	...
