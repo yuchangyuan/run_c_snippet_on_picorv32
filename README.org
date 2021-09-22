@@ -31,37 +31,14 @@
 * software side(C code)
 ** what code snippet actually do
 *** add place-holder function to make code compile
-#+begin_src c
-void __attribute__ ((noinline)) out_char(char c)
-{
-    // place holder here
-    // to be replace by actual IO code
-}
-
-void putStrLn(char *str)
-{
-    char *p = str;
-
-    while (*p) {
-        out_char(*p);
-        p++;
-    }
-}
-
-int main()
-{
-    putStrLn("Hello, world!");
-}
-#+end_src
+file:sw/s2.c
 
 *** compile with RISC-V cross compiler, then disassemble
-- gcc -o s2 s2.c
-- objectdump -D s2 > s2.list
+- riscv32-unknown-elf-gcc -nostdlib -Os -o s2 s2.c
+- riscv32-unknown-elf-objdump -D s2 > s2.list
 
-*** list
-#+begin_src asm
-; TODO, here include objectdump -D output
-#+end_src
+*** list file
+file:sw/s2.list
 
 *** actual do
 + memory access
@@ -85,6 +62,10 @@ int main()
 - data(sdata/rodata)
 - bss(COMMON)
 *** memory layout design for hardware
+in order to run the program:
+- we need to "place" our program in hardware, to be access by CPU;
+- we call the hardware device as "memory".
+
 **** hardware spec & restriction
 - start address of core, at 0x0000
 - both addres range of any memory block should continuous
@@ -132,6 +113,49 @@ both case include some code to initialize or prepare for environment before actu
   + more complex initialize code
   + more complex to generate the ROM
 ** and make our program can access hardware
+- use some signal to indicate we output a 'char'
+- access like a memory(memory mapped)
+  + a write to special address indicate an output operation
+  + the data written to the address is the 'char' to output
+*** our choice
+use address 512KiB as special address
+
+so we can update function out_char, see file:sw/s3.c
+*** some alternative
+we can also use address 0, which is not usually writable, as the special address
 ** linker script
+- program do not determine how to place itself in memory;
+- place by linker(called by compiler in link stage);
+- a "linker script" is used control linker;
+
+*** how to place our program
+**** rom0
+- code start at address 0x0
+  + actual entry for a program is not "main"
+  + some code need to run before "main"
+  + usually the entry is called "_start"
+- all RO data place in rom0
+- text section place in rom0
+**** rom1
+- not use after program start
+**** ram
+- place RW data need to initialize place at beginning
+- then place RW data need to initialize to 0
+- then other data
+- stack place at the end
+*** actual linker script
+file:sw/s3.lds
+
+see: [[info:ld#Scripts][info:ld#Scripts]] for format
+ref: file:../picorv32/picosoc/sections.lds
+*** initial code
+- set stack reg
+- copy data from rom1(.data section) to ram
+- initialize necessary memory range to 0(.bss section)
+- call main
+
+see:
+- file:sw/start.S
+- file:sw/init.c
 
 * hardware side(verilog HDL)
