@@ -147,7 +147,7 @@ we can also use address 0, which is not usually writable, as the special address
 file:sw/s3.lds
 
 see: [[info:ld#Scripts][info:ld#Scripts]] for format
-ref: file:../picorv32/picosoc/sections.lds
+ref: file:picorv32/picosoc/sections.lds
 *** initial code
 - set stack reg
 - copy data from rom1(.data section) to ram
@@ -159,3 +159,17 @@ see:
 - file:sw/init.c
 
 * hardware side(verilog HDL)
+** ram design
+file:hw/ram.v
+** rom design
+file:hw/rom_gen.c
+file:hw/rom0.v
+** top design
+file:picorv32/README.md
+file:hw/top.v
+
+file:/home/ycy/tmp/download/wavedrom.svg
+** testbench
+file:hw/tb.v
+** wrap up
+file:hw/gen.sh
