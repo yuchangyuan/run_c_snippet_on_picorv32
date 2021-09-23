@@ -7,32 +7,42 @@ Disassembly of section .text:
 00010054 <main>:
    10054:	00010537          	lui	a0,0x10
    10058:	1141                	addi	sp,sp,-16
-   1005a:	07850513          	addi	a0,a0,120 # 10078 <putStrLn+0xc>
+   1005a:	08c50513          	addi	a0,a0,140 # 1008c <putStrLn+0x1e>
    1005e:	c606                	sw	ra,12(sp)
-   10060:	2031                	jal	1006c <putStrLn>
+   10060:	2039                	jal	1006e <putStrLn>
    10062:	40b2                	lw	ra,12(sp)
    10064:	4501                	li	a0,0
    10066:	0141                	addi	sp,sp,16
    10068:	8082                	ret
 
 0001006a <out_char>:
-   1006a:	8082                	ret
+   1006a:	0001                	nop
+   1006c:	8082                	ret
 
-0001006c <putStrLn>:
-   1006c:	00054783          	lbu	a5,0(a0)
-   10070:	e391                	bnez	a5,10074 <putStrLn+0x8>
-   10072:	8082                	ret
-   10074:	0505                	addi	a0,a0,1
-   10076:	bfdd                	j	1006c <putStrLn>
+0001006e <putStrLn>:
+   1006e:	1141                	addi	sp,sp,-16
+   10070:	c422                	sw	s0,8(sp)
+   10072:	c606                	sw	ra,12(sp)
+   10074:	842a                	mv	s0,a0
+   10076:	00044503          	lbu	a0,0(s0)
+   1007a:	e511                	bnez	a0,10086 <putStrLn+0x18>
+   1007c:	4422                	lw	s0,8(sp)
+   1007e:	40b2                	lw	ra,12(sp)
+   10080:	4529                	li	a0,10
+   10082:	0141                	addi	sp,sp,16
+   10084:	b7dd                	j	1006a <out_char>
+   10086:	37d5                	jal	1006a <out_char>
+   10088:	0405                	addi	s0,s0,1
+   1008a:	b7f5                	j	10076 <putStrLn+0x8>
 
 Disassembly of section .rodata:
 
-00010078 <__bss_start-0x1010>:
-   10078:	6548                	flw	fa0,12(a0)
-   1007a:	6c6c                	flw	fa1,92(s0)
-   1007c:	77202c6f          	jal	s8,127ee <__global_pointer$+0xf66>
-   10080:	646c726f          	jal	tp,d76c6 <__global_pointer$+0xc5e3e>
-   10084:	0021                	c.nop	8
+0001008c <__bss_start-0x1010>:
+   1008c:	6548                	flw	fa0,12(a0)
+   1008e:	6c6c                	flw	fa1,92(s0)
+   10090:	77202c6f          	jal	s8,12802 <__global_pointer$+0xf66>
+   10094:	646c726f          	jal	tp,d76da <__global_pointer$+0xc5e3e>
+   10098:	0021                	c.nop	8
 	...
 
 Disassembly of section .comment:

@@ -2,6 +2,7 @@ void __attribute__ ((noinline)) out_char(char c)
 {
     // place holder here
     // to be replace by actual IO code
+    asm(" nop");
 }
 
 void putStrLn(char *str)
