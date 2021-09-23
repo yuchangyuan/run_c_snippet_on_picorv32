@@ -7,7 +7,7 @@ module ram
    input         ce);
 
    // 256Ki mem
-   reg [7:0]    mem[0:64 * 1024-1];
+   reg [31:0]    mem[0:64 * 1024-1];
 
    // read
    always @(posedge clk) begin
