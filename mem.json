@@ -1,0 +1,10 @@
+{ signal: [
+  { name: "clk",                 wave: 'p...........' },
+  { name: "mem_valid",           wave: '01..0.1.01.0' },
+  { name: "mem_ready",           wave: '01010..101.0' },
+  { name: "mem_addr[31:0]",      wave: 'x22.x.2.x22x', data: "a b c d e "},
+  { name: "mem_wdata[31:0]",     wave: 'x22.x.......', data: "x y"},
+  { name: "mem_wstrb[3:0]",      wave: 'x22.x.......', data: "0xF 0x8"},
+  { name: "mem_rdata[31:0]",     wave: 'xxxxxxx2x22x', data: "u v w"},
+]
+}

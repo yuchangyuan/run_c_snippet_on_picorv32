@@ -168,9 +168,8 @@ file:hw/rom_gen.c
 file:hw/rom0.v
 ** top design
 file:picorv32/README.md
+file:hw/mem.svg
 file:hw/top.v
-
-file:/home/ycy/tmp/download/wavedrom.svg
 ** testbench
 file:hw/tb.v
 ** wrap up
