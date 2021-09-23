@@ -1,0 +1,96 @@
+
+pi_calc:     file format elf32-littleriscv
+
+
+Disassembly of section .init:
+
+00000000 <_start>:
+   0:	00080137          	lui	sp,0x80
+   4:	00010113          	mv	sp,sp
+   8:	054000ef          	jal	ra,5c <init>
+   c:	092000ef          	jal	ra,9e <main>
+  10:	9002                	ebreak
+	...
+
+Disassembly of section .text:
+
+00000014 <put_uint_ln>:
+  14:	1101                	addi	sp,sp,-32
+  16:	4701                	li	a4,0
+  18:	46a9                	li	a3,10
+  1a:	87ba                	mv	a5,a4
+  1c:	e919                	bnez	a0,32 <put_uint_ln+0x1e>
+  1e:	00080737          	lui	a4,0x80
+  22:	e78d                	bnez	a5,4c <put_uint_ln+0x38>
+  24:	000807b7          	lui	a5,0x80
+  28:	4729                	li	a4,10
+  2a:	00e78023          	sb	a4,0(a5) # 80000 <_edata+0x40000>
+  2e:	6105                	addi	sp,sp,32
+  30:	8082                	ret
+  32:	007c                	addi	a5,sp,12
+  34:	00e78633          	add	a2,a5,a4
+  38:	02d577b3          	remu	a5,a0,a3
+  3c:	0705                	addi	a4,a4,1
+  3e:	03078793          	addi	a5,a5,48
+  42:	00f60023          	sb	a5,0(a2)
+  46:	02d55533          	divu	a0,a0,a3
+  4a:	bfc1                	j	1a <put_uint_ln+0x6>
+  4c:	17fd                	addi	a5,a5,-1
+  4e:	0074                	addi	a3,sp,12
+  50:	96be                	add	a3,a3,a5
+  52:	0006c683          	lbu	a3,0(a3)
+  56:	00d70023          	sb	a3,0(a4) # 80000 <_edata+0x40000>
+  5a:	b7e1                	j	22 <put_uint_ln+0xe>
+
+0000005c <init>:
+  5c:	000407b7          	lui	a5,0x40
+  60:	00040737          	lui	a4,0x40
+  64:	00078793          	mv	a5,a5
+  68:	000206b7          	lui	a3,0x20
+  6c:	00070713          	mv	a4,a4
+  70:	00e7ed63          	bltu	a5,a4,8a <init+0x2e>
+  74:	000407b7          	lui	a5,0x40
+  78:	00040737          	lui	a4,0x40
+  7c:	00078793          	mv	a5,a5
+  80:	00070713          	mv	a4,a4
+  84:	00e7e963          	bltu	a5,a4,96 <init+0x3a>
+  88:	8082                	ret
+  8a:	4290                	lw	a2,0(a3)
+  8c:	0791                	addi	a5,a5,4
+  8e:	0691                	addi	a3,a3,4
+  90:	fec7ae23          	sw	a2,-4(a5) # 3fffc <main+0x3ff5e>
+  94:	bff1                	j	70 <init+0x14>
+  96:	0791                	addi	a5,a5,4
+  98:	fe07ae23          	sw	zero,-4(a5)
+  9c:	b7e5                	j	84 <init+0x28>
+
+0000009e <main>:
+  9e:	1141                	addi	sp,sp,-16
+  a0:	c422                	sw	s0,8(sp)
+  a2:	17d78437          	lui	s0,0x17d78
+  a6:	40040413          	addi	s0,s0,1024 # 17d78400 <_edata+0x17d38400>
+  aa:	c226                	sw	s1,4(sp)
+  ac:	c04a                	sw	s2,0(sp)
+  ae:	c606                	sw	ra,12(sp)
+  b0:	448d                	li	s1,3
+  b2:	8922                	mv	s2,s0
+  b4:	8522                	mv	a0,s0
+  b6:	3fb9                	jal	14 <put_uint_ln>
+  b8:	00248793          	addi	a5,s1,2
+  bc:	02995733          	divu	a4,s2,s1
+  c0:	0491                	addi	s1,s1,4
+  c2:	02f957b3          	divu	a5,s2,a5
+  c6:	8f99                	sub	a5,a5,a4
+  c8:	943e                	add	s0,s0,a5
+  ca:	b7ed                	j	b4 <main+0x16>
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	3a434347          	fmsub.d	ft6,ft6,ft4,ft7,rmm
+   4:	2820                	fld	fs0,80(s0)
+   6:	29554e47          	fmsub.s	ft8,fa0,fs5,ft5,rmm
+   a:	3820                	fld	fs0,112(s0)
+   c:	322e                	fld	ft4,232(sp)
+   e:	302e                	fld	ft0,232(sp)
+	...
