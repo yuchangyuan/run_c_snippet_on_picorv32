@@ -1,0 +1,9 @@
+{ signal: [
+  { name: "clk",        wave: 'p............' },
+  { name: "ce",         wave: '0101.0.1.010.' },
+  { name: "addr[15:0]", wave: 'x3x33x.33x3x.', data: "0x13 0x55 0xFF 0x13 0x22 0x33" },
+  { name: "wr[3:0]",    wave: 'x2x22x.2.x2x.', data: "0xF 0x3 0xC 0x0 0x0"},
+  { name: "d[31:0]",    wave: 'x2x22x.......', data: "x y z" },
+  { name: "q[31:0]",    wave: 'x.......22.2.', data: "x w u"},
+]
+}
