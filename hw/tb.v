@@ -1,3 +1,5 @@
+`timescale 1ns/10ps
+
 module tb;
    reg clk;
    reg rst_n;
