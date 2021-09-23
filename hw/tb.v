@@ -45,8 +45,10 @@ module tb;
 
    // vcd
    initial begin
+`ifndef NO_VCD
       $dumpfile("tb.vcd");
       $dumpvars(0, tb);
+`endif
    end
 
 endmodule // tb
