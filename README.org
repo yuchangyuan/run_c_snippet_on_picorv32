@@ -160,8 +160,10 @@ see:
 
 * hardware side(verilog HDL)
 ** ram design
+file:hw/ram.svg
 file:hw/ram.v
 ** rom design
+file:hw/rom.svg
 file:hw/rom_gen.c
 file:hw/rom0.v
 ** top design

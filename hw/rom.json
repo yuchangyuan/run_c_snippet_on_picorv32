@@ -1,0 +1,6 @@
+{ signal: [
+  { name: "clk",        wave: 'p......' },
+  { name: "addr[29:0]", wave: '222.22.', data: "A1 A2 A3 A4 A5" },
+  { name: "q[31:0]",    wave: 'x222.22', data: "D1 D2 D3 D4 D5"},
+]
+}
