@@ -13,10 +13,10 @@ module top(input            clk,
 
    wire                     rom0_ce, rom1_ce, ram_ce, out_ce;
 
-   assign rom0_ce = mem_addr[31:17] == 15'h0; // [0, 128Ki)
-   assign rom1_ce = mem_addr[31:17] == 15'h1; // [128Ki, 256Ki)
-   assign ram_ce  = mem_addr[31:18] == 14'h1; // [256Ki, 512Ki)
-   assign out_ce  = mem_addr[31: 0] == 32'h80000; // 512Ki
+   assign rom0_ce = mem_valid && (mem_addr[31:17] == 15'h0); // [0, 128Ki)
+   assign rom1_ce = mem_valid && (mem_addr[31:17] == 15'h1); // [128Ki, 256Ki)
+   assign ram_ce  = mem_valid && (mem_addr[31:18] == 14'h1); // [256Ki, 512Ki)
+   assign out_ce  = mem_valid && (mem_addr[31: 0] == 32'h80000); // 512Ki
 
    // signal for read_rdy
    // read has always 1 cycle latency
@@ -61,7 +61,7 @@ module top(input            clk,
          out_dat <= 8'h0;
          out_ctl <= 1'b0;
       end
-      else if (mem_valid && out_ce) begin
+      else if (out_ce) begin
          out_ctl <= ~out_ctl;
          out_dat <= mem_wdata[7:0];
       end
