@@ -38,12 +38,12 @@ module top(input            clk,
    wire [31:0]              rom0_q;
    rom0 rom0(.clk(clk),
              .q(rom0_q),
-             .addr(mem_addr[31:2]));
+             .addr({15'b0, mem_addr[16:2]}));
    // rom1
    wire [31:0]              rom1_q;
    rom1 rom1(.clk(clk),
              .q(rom1_q),
-             .addr(mem_addr[31:2]));
+             .addr({15'b0, mem_addr[16:2]}));
 
 
    // ram
