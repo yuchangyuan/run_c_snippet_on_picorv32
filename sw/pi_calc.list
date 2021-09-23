@@ -67,8 +67,8 @@ Disassembly of section .text:
 0000009e <main>:
   9e:	1141                	addi	sp,sp,-16
   a0:	c422                	sw	s0,8(sp)
-  a2:	17d78437          	lui	s0,0x17d78
-  a6:	40040413          	addi	s0,s0,1024 # 17d78400 <_edata+0x17d38400>
+  a2:	ee6b3437          	lui	s0,0xee6b3
+  a6:	80040413          	addi	s0,s0,-2048 # ee6b2800 <_edata+0xee672800>
   aa:	c226                	sw	s1,4(sp)
   ac:	c04a                	sw	s2,0(sp)
   ae:	c606                	sw	ra,12(sp)

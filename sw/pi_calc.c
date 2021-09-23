@@ -29,7 +29,7 @@ int main()
 {
     int i;
 
-    const uint32_t a = 400000000;
+    const uint32_t a = 4000000000;
     uint32_t sum = a;
 
     i = 3;
