@@ -161,15 +161,47 @@ see:
 * hardware side(verilog HDL)
 ** ram design
 [[./hw/ram.svg]]
+
+| OP                | address | input data    | output data |
+|-------------------+---------+---------------+-------------|
+| WRITE(word)       |    0x13 | x             | -           |
+| WRITE(low 16bit)  |    0x55 | y(low 16bit)  | -           |
+| WRITE(high 16bit) |    0xFF | z(high 16bit) | -           |
+| READ              |    0x13 | -             | x           |
+| READ              |    0x22 | -             | w           |
+| READ              |    0x33 | -             | u           |
+
 [[./hw/ram.v]]
 ** rom design
 [[./hw/rom.svg]]
-[[./hw/rom_gen.c]]
-[[./hw/rom0.v]]
+
+| address | value |
+|---------+-------|
+| A1      | D1    |
+| A2      | D2    |
+| A3      | D3    |
+| A4      | D4    |
+| A5      | D5    |
+| ...     | ...   |
+
+- [[./hw/rom_gen.c]]
+- [[./hw/rom0.v]]
 ** top design
 [[./picorv32/README.md]]
+
 [[./hw/mem.svg]]
+
+| OP               | address | input data   | output data |
+|------------------+---------+--------------+-------------|
+| WRITE(word)      | a       | x            | -           |
+| WRITE(high byte) | b       | y(high 8bit) | -           |
+| READ             | c       | -            | u           |
+| READ             | d       | -            | v           |
+| READ             | e       | -            | w           |
+
 [[./hw/top.v]]
+
+
 ** testbench
 [[./hw/tb.v]]
 ** wrap up
