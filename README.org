@@ -31,14 +31,14 @@
 * software side(C code)
 ** what code snippet actually do
 *** add place-holder function to make code compile
-file:sw/s2.c
+[[./sw/s2.c]]
 
 *** compile with RISC-V cross compiler, then disassemble
 - riscv32-unknown-elf-gcc -nostdlib -Os -o s2 s2.c
 - riscv32-unknown-elf-objdump -D s2 > s2.list
 
 *** list file
-file:sw/s2.list
+[[./sw/s2.list]]
 
 *** actual do
 + memory access
@@ -120,7 +120,7 @@ both case include some code to initialize or prepare for environment before actu
 *** our choice
 use address 512KiB as special address
 
-so we can update function out_char, see file:sw/s3.c
+so we can update function out_char, see [[./sw/s3.c]]
 *** some alternative
 we can also use address 0, which is not usually writable, as the special address
 ** linker script
@@ -144,10 +144,10 @@ we can also use address 0, which is not usually writable, as the special address
 - then other data
 - stack place at the end
 *** actual linker script
-file:sw/s3.lds
+[[./sw/s3.lds]]
 
 see: [[info:ld#Scripts][info:ld#Scripts]] for format
-ref: file:picorv32/picosoc/sections.lds
+ref: [[./picorv32/picosoc/sections.lds]]
 *** initial code
 - set stack reg
 - copy data from rom1(.data section) to ram
@@ -155,22 +155,22 @@ ref: file:picorv32/picosoc/sections.lds
 - call main
 
 see:
-- file:sw/start.S
-- file:sw/init.c
+- [[./sw/start.S]]
+- [[./sw/init.c]]
 
 * hardware side(verilog HDL)
 ** ram design
-file:hw/ram.svg
-file:hw/ram.v
+[[./hw/ram.svg]]
+[[./hw/ram.v]]
 ** rom design
-file:hw/rom.svg
-file:hw/rom_gen.c
-file:hw/rom0.v
+[[./hw/rom.svg]]
+[[./hw/rom_gen.c]]
+[[./hw/rom0.v]]
 ** top design
-file:picorv32/README.md
-file:hw/mem.svg
-file:hw/top.v
+[[./picorv32/README.md]]
+[[./hw/mem.svg]]
+[[./hw/top.v]]
 ** testbench
-file:hw/tb.v
+[[./hw/tb.v]]
 ** wrap up
-file:hw/gen.sh
+[[./hw/gen.sh]]
