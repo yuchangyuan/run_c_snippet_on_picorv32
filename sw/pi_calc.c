@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <math.h>
 
 static void out_char(char c)
 {
@@ -25,12 +26,19 @@ void put_uint_ln(uint32_t x)
     out_char('\n');
 }
 
+// hack here, but we not use
+int __errno;
+
 int main()
 {
     int i;
 
     const uint32_t a = 4000000000;
     uint32_t sum = a;
+
+    volatile double x = 0.5;
+
+    put_uint_ln(asin(x) * 6 * 1000000000);
 
     i = 3;
     while (1) {
