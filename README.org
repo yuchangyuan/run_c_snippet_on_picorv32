@@ -29,7 +29,7 @@
 - wrap up & run the code, with simulator
 - more experiment
 * software side(C code)
-** what code snippet actually do
+** analysis: what code snippet actually do
 *** add place-holder function to make code compile
 [[./sw/s2.c]]
 
@@ -51,7 +51,7 @@
 + we have core
 + we need memory
 + we need output port(no need of input)
-** how to make our program accessible to hardware
+** program, memory & hardware
 *** what a C program contain
 + read only data
 + readable & writable data
@@ -112,7 +112,7 @@ both case include some code to initialize or prepare for environment before actu
 - merge rom0 & rom1 into a single ROM, and include a table in ROM, which contain the each section address and size
   + more complex initialize code
   + more complex to generate the ROM
-** and make our program can access hardware
+** program, IO & hardware
 - use some signal to indicate we output a 'char'
 - access like a memory(memory mapped)
   + a write to special address indicate an output operation
