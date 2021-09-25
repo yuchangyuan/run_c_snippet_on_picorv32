@@ -3,7 +3,7 @@
 #+author: Yù Chāngyuǎn
 
 # use large font, run below command with C-x C-e
-# (set-frame-font "Ubuntu Mono-32")
+# (set-frame-font "Ubuntu Mono-48")
 
 * warm up
 ** what we want
