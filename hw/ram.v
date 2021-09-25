@@ -11,7 +11,7 @@ module ram
 
    // read
    always @(posedge clk) begin
-     if (ce) q <= mem[addr];
+     if (ce && (wr == 4'h0)) q <= mem[addr];
    end
 
    // write
